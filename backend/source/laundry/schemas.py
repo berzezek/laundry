@@ -72,14 +72,17 @@ class TelegramModel(BaseModel):
     Container for a single telegram record.
     """
 
-    id: Optional[PyObjectId] = Field(alias="_id", default=None)
-    telegram_id: str = Field(...)
+    telegram_id: int = Field(...)
     telegram_name: str = Field(...)
+    is_active: bool = True
     model_config = ConfigDict(
         populate_by_name=True,
         arbitrary_types_allowed=True,
         json_schema_extra={
-            "example": {"telegram_id": "123456789", "telegram_name": "My Telegram"}
+            "example": {
+                "telegram_id": "123456789",
+                "telegram_name": "Telegram"
+            }
         },
     )
 
@@ -89,13 +92,18 @@ class UpdateTelegramModel(BaseModel):
     A set of optional updates to be made to a document in the database.
     """
 
-    telegram_id: Optional[str] = None
+    telegram_id: Optional[int] = None
     telegram_name: Optional[str] = None
+    is_active: Optional[bool] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders={ObjectId: str},
         json_schema_extra={
-            "example": {"telegram_id": "123456789", "telegram_name": "My Telegram"}
+            "example": {
+                "telegram_id": "123456789",
+                "telegram_name": "Telegram",
+                "is_active": True,
+            }
         },
     )
 
@@ -110,11 +118,11 @@ class CustomerModel(BaseModel):
     is_active: bool = Field(...)
     daily_orders: Optional[list[DailyOrderModel]] = []
     orders: Optional[list[OrdersModel]] = []
-    telegram: Optional[TelegramModel] = None
+    telegram: Optional[list[TelegramModel]] = []
     model_config = ConfigDict(
         populate_by_name=True,
         arbitrary_types_allowed=True,
-        json_schema_extra={"example": {"title": "My Customer", "is_active": True}},
+        json_schema_extra={"example": {"title": "Customer", "is_active": True}},
     )
 
 
@@ -127,13 +135,13 @@ class UpdateCustomerModel(BaseModel):
     is_active: Optional[bool] = None
     daily_orders: Optional[list[UpdateDailyOrderModel]] = None
     orders: Optional[list[UpdateOrdersModel]] = None
-    telegram: Optional[UpdateTelegramModel] = None
+    telegram: Optional[list[UpdateTelegramModel]] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders={ObjectId: str},
         json_schema_extra={
             "example": {
-                "title": "My no active Customer",
+                "title": "NewCustomer",
                 "is_active": False,
                 "daily_orders": [
                     {"day_of_week": 1, "time_of_day": "21:00:00", "is_active": True},
@@ -149,10 +157,13 @@ class UpdateCustomerModel(BaseModel):
                         "delivery_day_time": "2021-10-10 21:00:05",
                     },
                 ],
-                "telegram": {
-                    "telegram_id": "123456789",
-                    "telegram_name": "My Telegram",
-                },
+                "telegram": [
+                    {
+                        "telegram_id": "123456789",
+                        "telegram_name": "Telegram",
+                        "is_active": True
+                    }
+                ],
             }
         },
     )

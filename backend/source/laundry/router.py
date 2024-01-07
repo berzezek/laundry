@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from typing import Optional, List, Dict
 from source.laundry.models import (
     CustomerCRUD,
     CustomerModel,
@@ -76,9 +77,9 @@ async def add_telegram_id(id: str, data: TelegramModel):
     return response
 
 
-@router.get("/set_orders_by_daily_orders/}")
-async def set_orders_by_daily_orders():
-    response = await CustomerCRUD(CustomerModel).add_orders_by_daily_orders(
+@router.get("/add_orders_by_daily_orders/")
+async def add_orders_by_daily_orders():
+    response = await CustomerCRUD(List[Optional[Dict]]).add_orders_by_daily_orders(
         delivery_collection
     )
     return response
@@ -99,9 +100,26 @@ async def all_overdue_orders_for_today():
     )
     return response
 
+
 @router.get("/all_delivered_orders_for_today/")
 async def all_delivered_orders_for_today():
     response = await CustomerCRUD(CustomerModel).get_all_delivered_orders_for_today(
         delivery_collection
+    )
+    return response
+
+
+@router.get("/get_customer_by_telegram_id/{telegram_id}")
+async def get_customer_by_telegram_id(telegram_id: str):
+    response = await CustomerCRUD(CustomerModel).get_customer_by_telegram_id(
+        telegram_id, delivery_collection
+    )
+    return response
+
+
+@router.get("/get_id_by_customer_title/{title}")
+async def get_id_by_customer_title(title: str):
+    response = await CustomerCRUD(CustomerModel).get_id_by_customer_title(
+        title, delivery_collection
     )
     return response

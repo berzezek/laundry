@@ -2,6 +2,8 @@ from bson.objectid import ObjectId
 from typing import Generic, TypeVar
 from pydantic import BaseModel
 from motor.motor_asyncio import AsyncIOMotorCollection
+from pymongo import ReturnDocument
+from fastapi import HTTPException
 
 
 # Define the model type
@@ -53,15 +55,26 @@ class CRUDMongo(Generic[ModelType, ModelCollectionType, UpdateSchemaType]):
 
         The record is looked up by `id`.
         """
-        if (
-            updated_data := await collection.update_one(
-                {"_id": ObjectId(id)}, {"$set": data.model_dump(by_alias=True)}
+        data = {
+            k: v for k, v in data.model_dump(by_alias=True).items() if v is not None
+        }
+        if len(data) >= 1:
+            update_result = await collection.find_one_and_update(
+                {"_id": ObjectId(id)},
+                {"$set": data},
+                return_document=ReturnDocument.AFTER,
             )
-        ).modified_count == 1:
-            if (updated_data := await collection.find_one({"_id": ObjectId(id)})) is not None:
-                return self.model.model_validate(updated_data)
-        return None
-    
+            if update_result is not None:
+                return self.model.model_validate(update_result)
+            else:
+                raise HTTPException(status_code=404, detail=f"Data {id} not found")
+
+        # The update is empty, but we should still return the matching document:
+        if (existing_data := await collection.find_one({"_id": id})) is not None:
+            return self.model.model_validate(existing_data)
+
+        raise HTTPException(status_code=404, detail=f"Data {id} not found")
+
     async def delete_data(
         self, id: str, collection: AsyncIOMotorCollection
     ) -> ModelType:
@@ -71,10 +84,7 @@ class CRUDMongo(Generic[ModelType, ModelCollectionType, UpdateSchemaType]):
         The record is looked up by `id`.
         """
         if (
-            deleted_data := await collection.delete_one(
-                {"_id": ObjectId(id)}
-            )
+            deleted_data := await collection.delete_one({"_id": ObjectId(id)})
         ).deleted_count == 1:
             return True
         return False
-    

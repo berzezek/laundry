@@ -1,0 +1,79 @@
+<mxfile host="65bd71144e">
+    <diagram id="KzWbFNTUzXUTeeO1RjBS" name="Page-1">
+        <mxGraphModel dx="662" dy="232" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Start" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="365" y="43" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="exists" style="edgeStyle=none;html=1;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="not exists" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="get_telegram_id" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+                    <mxGeometry x="365" y="162" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="get_today_orders" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+                    <mxGeometry x="367" y="281" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="7" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="554" y="311"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="bind_customer" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+                    <mxGeometry x="565" y="162" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="u-MeqiF_hXEUR6dWvZM7" name="FMS">
+        <mxGraphModel dx="1529" dy="663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-15" value="" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;elbow=vertical;" edge="1" parent="1" source="6IOknanZCxSgQxhsyNbT-1" target="6IOknanZCxSgQxhsyNbT-14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-1" value="Start" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="1">
+                    <mxGeometry x="135" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-19" value="True" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;elbow=vertical;" edge="1" parent="1" source="6IOknanZCxSgQxhsyNbT-14" target="6IOknanZCxSgQxhsyNbT-18">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-32" value="False" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;elbow=vertical;" edge="1" parent="1" source="6IOknanZCxSgQxhsyNbT-14" target="6IOknanZCxSgQxhsyNbT-31">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-14" value="authorized user" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+                    <mxGeometry x="355" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-26" value="False" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;elbow=vertical;" edge="1" parent="1" source="6IOknanZCxSgQxhsyNbT-18" target="6IOknanZCxSgQxhsyNbT-25">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-28" value="True" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;elbow=vertical;" edge="1" parent="1" source="6IOknanZCxSgQxhsyNbT-18" target="6IOknanZCxSgQxhsyNbT-27">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-18" value="is_admin" style="rhombus;whiteSpace=wrap;html=1;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+                    <mxGeometry x="375" y="210" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-25" value="get_today_orders" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;rounded=0;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+                    <mxGeometry x="135" y="220" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-27" value="get_admin_func" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;rounded=0;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+                    <mxGeometry x="595" y="220" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6IOknanZCxSgQxhsyNbT-31" value="add_telegram" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;rounded=0;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+                    <mxGeometry x="595" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

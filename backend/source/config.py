@@ -5,4 +5,6 @@ load_dotenv()
 
 MONGODB_URL = os.getenv("MONGODB_URL")
 
-MONGODB = 'delivery'
+DEBUG = os.getenv("DEBUG")
+
+MONGODB = "delivery"

@@ -3,7 +3,7 @@ requirements:
     pip-compile --strip-extras test-requirements.in
 
 run:
-    uvicorn app:app --reload
+    uvicorn source.app:app --reload
 
 test:
     pytest
