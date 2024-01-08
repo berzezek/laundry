@@ -165,73 +165,65 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
                     )
         return adding_orders
 
-    async def update_all_delivery_times(
-        self, collection: AsyncIOMotorCollection
-    ) -> list[dict]:
-        modified_orders = []
-        cursor = collection.find({"orders.delivery_day_time": None})
-        async for document in cursor:
-            customer_name = document.get("title", "Unknown Customer")
-            orders = document.get("orders", [])
-            for order in orders:
-                if order.get("delivery_day_time") is None:
-                    order["delivery_day_time"] = order.get("order_day_time")
-                    modified_orders.append(
-                        {"customer_name": customer_name, "order": order}
-                    )
-
-            await collection.update_one(
-                {"_id": document["_id"]}, {"$set": {"orders": orders}}
-            )
-
-        return modified_orders
-
-    async def get_all_overdue_orders_for_today(
-        self, collection: AsyncIOMotorCollection
-    ) -> list[dict]:
-        overdue_orders = []
-        today = datetime.now()
-        cursor = collection.find({"orders.delivery_day_time": {"$lt": today}})
-        async for document in cursor:
-            customer_name = document.get("title", "Unknown Customer")
-            orders = document.get("orders", [])
-            for order in orders:
-                if order.get("delivery_day_time") is not None:
-                    if order.get("delivery_day_time") > order.get("order_day_time"):
-                        overdue_seconds = (
-                            order.get("delivery_day_time") - order.get("order_day_time")
-                        ).total_seconds()
-                        order["overdue"] = str(timedelta(seconds=overdue_seconds))
-                        overdue_orders.append(
-                            {"customer_name": customer_name, "order": order}
-                        )
-        return overdue_orders
-
     async def get_all_delivered_orders_for_today(
         self, collection: AsyncIOMotorCollection
     ) -> list[dict]:
-        delivered_orders = []
-        today = datetime.now()
-        cursor = collection.find({"orders.delivery_day_time": {"$lt": today}})
-        async for document in cursor:
-            customer_name = document.get("title", "Unknown Customer")
-            orders = document.get("orders", [])
-            for order in orders:
-                if order.get("delivery_day_time") is not None:
-                    if order.get("delivery_day_time") > order.get("order_day_time"):
-                        overdue_seconds = (
-                            order.get("delivery_day_time") - order.get("order_day_time")
-                        ).total_seconds()
-                        order["overdue"] = str(timedelta(seconds=overdue_seconds))
-                    else:
-                        overdue_seconds = (
-                            order.get("order_day_time") - order.get("delivery_day_time")
-                        ).total_seconds()
-                        order["early"] = str(timedelta(seconds=overdue_seconds))
-                    delivered_orders.append(
-                        {"customer_name": customer_name, "order": order}
-                    )
-        return delivered_orders
+        current_date_str = datetime.utcnow().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        pipeline = [
+            {"$unwind": "$orders"},
+            {"$match": {"orders.order_day_time": {"$gte": current_date_str}, "orders.delivery_day_time": {"$ne": None}}},
+            {
+                "$group": {
+                    "_id": "$title",
+                    "orders": {
+                        "$push": {
+                            "order_day_time": "$orders.order_day_time",
+                            "delivery_day_time": "$orders.delivery_day_time",
+                        }
+                    },
+                }
+            },
+            {"$project": {"title": "$_id", "_id": 0, "today_delivered_orders": "$orders"}},
+        ]
+
+        today_delivered_orders = []
+        async for orders in collection.aggregate(pipeline):
+            today_delivered_orders.append(orders)
+
+        return today_delivered_orders
+
+    async def get_all_orders_for_today(
+        self, collection: AsyncIOMotorCollection
+    ) -> list[dict]:
+        current_date_str = datetime.utcnow().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        pipeline = [
+            {"$unwind": "$orders"},
+            {"$match": {"orders.order_day_time": {"$gte": current_date_str}}},
+            {
+                "$group": {
+                    "_id": "$title",
+                    "orders": {
+                        "$push": {
+                            "order_day_time": "$orders.order_day_time",
+                            "delivery_day_time": "$orders.delivery_day_time",
+                        }
+                    },
+                }
+            },
+            {"$project": {"title": "$_id", "_id": 0, "today_orders": "$orders"}},
+        ]
+
+        today_orders = []
+        async for orders in collection.aggregate(pipeline):
+            today_orders.append(orders)
+
+        return today_orders
 
     async def get_customer_by_telegram_id(
         self, telegram_id: str, collection: AsyncIOMotorCollection

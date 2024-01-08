@@ -3,7 +3,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
-from handlers import admin, common, customer
+from handlers import admin, common
 
 from config import BOT_TOKEN
 
@@ -21,7 +21,6 @@ async def main():
 
     dp.include_router(common.router)
     dp.include_router(admin.router)
-    # dp.include_router(customer.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

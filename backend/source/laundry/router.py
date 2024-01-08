@@ -93,17 +93,17 @@ async def update_all_delivery_times():
     return response
 
 
-@router.get("/all_overdue_orders_for_today/")
-async def all_overdue_orders_for_today():
-    response = await CustomerCRUD(CustomerModel).get_all_overdue_orders_for_today(
+@router.get("/all_delivered_orders_for_today/")
+async def all_delivered_orders_for_today():
+    response = await CustomerCRUD(CustomerModel).get_all_delivered_orders_for_today(
         delivery_collection
     )
     return response
 
 
-@router.get("/all_delivered_orders_for_today/")
-async def all_delivered_orders_for_today():
-    response = await CustomerCRUD(CustomerModel).get_all_delivered_orders_for_today(
+@router.get("/all_orders_for_today/")
+async def all_orders_for_today():
+    response = await CustomerCRUD(CustomerModel).get_all_orders_for_today(
         delivery_collection
     )
     return response

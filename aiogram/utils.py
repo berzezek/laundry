@@ -4,7 +4,7 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 from datetime import datetime
 from bot import logging
-from keyboards.simple_fab import OrdersCallbackFactory, get_keyboard_fab
+from keyboards.simple_fab import OrdersCallbackFactory, get_admin_keyboard_fab
 from keyboards.simple_row import make_row_keyboard, make_hidden_row_keyboard
 from config import DELIVERY_SERVICE_API_URL, ADMIN_USERS
 
@@ -24,6 +24,20 @@ def add_telegram(id: str, data: dict):
 def get_id_by_customer_title(title: str):
     response = requests.get(
         DELIVERY_SERVICE_API_URL + f"get_id_by_customer_title/{title}"
+    )
+    return response
+
+
+def get_all_delivered_orders_for_today():
+    response = requests.get(
+        DELIVERY_SERVICE_API_URL + f"all_delivered_orders_for_today/"
+    )
+    return response
+
+
+def get_all_orders_for_today():
+    response = requests.get(
+        DELIVERY_SERVICE_API_URL + f"all_orders_for_today/"
     )
     return response
 
@@ -62,30 +76,6 @@ def delivery_order(callback_data_time_with_customer_id: OrdersCallbackFactory):
     logging.info(f'Customer id: {customer_id} order time updated: {update_order_time}')
     return response
 
-
-# message functions
-
-async def send_start_message(message: Message, state: FSMContext, authorize_choose: list):
-    await state.clear()
-    await message.answer(
-        text="Здравствуйте зарегистрируйтесь пожалуйста: ",
-        reply_markup=make_hidden_row_keyboard(authorize_choose),
-    )
-
-async def send_registration_success_message(message: Message, registered_venue: str, re_registration_choose: list):
-    await message.answer(
-        text=f"Привет: {message.from_user.full_name}!\n"
-             f"Вы успешно зарегистрировали заведение: <b>{registered_venue}</b>",
-        reply_markup=make_row_keyboard(re_registration_choose),
-    )
-    
-async def send_restart_message(message: Message, state: FSMContext):
-    await state.clear()
-    await message.answer(
-        text=f"Заведение <b>{message.text}</b> не было зарегистрировано!\n"
-        "Чтобы начать сначала нажмите /start",
-        reply_markup=ReplyKeyboardRemove(),
-    )
     
 async def is_customer_exist(message: Message, state: FSMContext, re_registration_choose: list) -> bool:
     state_data = await state.get_data()
@@ -98,16 +88,6 @@ async def is_customer_exist(message: Message, state: FSMContext, re_registration
         return True
     return False
 
-
-async def send_admin_start_message(message: Message):
-    await message.answer(
-        text="Здравствуйте, Admin!",
-        reply_markup=ReplyKeyboardRemove(),
-    )
-    await message.answer(
-        text="Выберите действие:",
-        reply_markup=get_keyboard_fab(),
-    )
 
 def choose_row_keyboard(message: Message, customer_row: list, admin_row: list) -> list:
     if str(message.from_user.id) in ADMIN_USERS:

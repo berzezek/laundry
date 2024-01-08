@@ -8,8 +8,8 @@ from aiogram import types, F
 from keyboards.simple_row import make_row_keyboard
 from messages import sending_messages
 from keyboards.simple_fab import (
+    get_admin_keyboard_fab,
     get_keyboard_orders_fab,
-    get_keyboard_fab,
     OrdersCallbackFactory,
 )
 from utils import (
@@ -17,8 +17,6 @@ from utils import (
     get_today_orders_by_customer_title,
     get_id_by_customer_title,
     delivery_order,
-    # message function
-    send_registration_success_message,
     choose_row_keyboard,
 )
 from bot import logging
@@ -77,6 +75,10 @@ async def pure_state(message: Message, state: FSMContext):
             text=sending_messages(message).get("admin_start"),
             reply_markup=ReplyKeyboardRemove(),
         )
+        await message.answer(
+            text=sending_messages(message).get("choose_action"),
+            reply_markup=get_admin_keyboard_fab(),
+        )
         await state.set_state(DeliveryState.admin_state)
     else:
         customer_id = get_id_by_customer_title(message.text)
@@ -86,8 +88,11 @@ async def pure_state(message: Message, state: FSMContext):
         }
         response = add_telegram(customer_id.json(), data)
         if response.status_code == 200:
-            await send_registration_success_message(
-                message, message.text, re_registration_choose
+            await message.answer(
+                text=sending_messages(message, message.text).get(
+                    "registration_success"
+                ),
+                reply_markup=make_row_keyboard(re_registration_choose),
             )
             await state.update_data({"customer": message.text.lower()})
             logging.info(
@@ -134,14 +139,18 @@ async def callbacks_add_delivery_time_to_order(
     callback: types.CallbackQuery, callback_data: OrdersCallbackFactory
 ):
     delivery_order(callback_data)
-    await callback.answer(sending_messages(callback.message).get("delivery_for_customer_success"))
+    await callback.answer(
+        sending_messages(callback.message).get("delivery_for_customer_success")
+    )
 
 
 @router.callback_query(OrdersCallbackFactory.filter(F.action == "delivered"))
 async def callbacks_delivery_allready_delivered(
     callback: types.CallbackQuery, callback_data: OrdersCallbackFactory
 ):
-    await callback.answer(sending_messages(callback.message).get("delivery_allready_delivered"))
+    await callback.answer(
+        sending_messages(callback.message).get("delivery_allready_delivered")
+    )
 
 
 @router.callback_query(OrdersCallbackFactory.filter(F.action == "delivered_time"))
@@ -150,17 +159,17 @@ async def callbacks_delivery_allready_delivered(
 ):
     callback_data_hour = callback_data.value.split("_")[0]
     callback_data_minute = callback_data.value.split("_")[1]
-    
+
     current_time = datetime.now()  # Get the current time
-    
+
     delivery_time = datetime(
         year=current_time.year,
         month=current_time.month,
         day=current_time.day,
         hour=int(callback_data_hour),
-        minute=int(callback_data_minute)
+        minute=int(callback_data_minute),
     )
-    
+
     if delivery_time > current_time:  # Check if delivery time is in the future
         time_difference = delivery_time - current_time
         # to hours and minutes
