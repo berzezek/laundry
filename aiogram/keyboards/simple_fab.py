@@ -24,8 +24,9 @@ def get_keyboard_orders_fab(orders: list):
 def get_admin_keyboard_fab():
     builder = InlineKeyboardBuilder()
     # builder.button(text="Добавить Заказчика", callback_data=OrdersCallbackFactory(action="add_customer"))
-    # builder.button(text="Добавить Расписание", callback_data=OrdersCallbackFactory(action="add_schedule"))
     builder.button(text="Показать статистику", callback_data=OrdersCallbackFactory(action="get_statistic"))
-    builder.button(text="Скачать статистику", callback_data=OrdersCallbackFactory(action="download_statistic"))
+    # builder.button(text="Скачать статистику", callback_data=OrdersCallbackFactory(action="download_statistic"))
+    builder.button(text="Показать расписание", callback_data=OrdersCallbackFactory(action="periodic_orders"))
+    # builder.button(text="Скачать расписание", callback_data=OrdersCallbackFactory(action="get_schedule"))
     builder.adjust(2)
     return builder.as_markup()

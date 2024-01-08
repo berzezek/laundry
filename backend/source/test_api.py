@@ -12,6 +12,7 @@ def test_api():
     initial_doc = {
         "title": "Test Title",
         "is_active": True,
+        "description": "tt",
     }
 
     try:
@@ -25,6 +26,7 @@ def test_api():
             "If the test fails in the middle you may want to manually remove the document."
         )
         assert doc["title"] == "Test Title"
+        assert doc["description"] == "tt"
         assert doc["is_active"] is True
         assert doc["daily_orders"] == []
         assert doc["orders"] == []
@@ -57,6 +59,7 @@ def test_api():
         response.raise_for_status()
         doc = response.json()
         assert doc["title"] == "Updated Title"
+        assert doc["description"] == "tt"
         assert doc["is_active"] is True
         assert doc["daily_orders"] == []
         assert doc["orders"] == []
@@ -68,6 +71,7 @@ def test_api():
         doc = response.json()
         assert doc["_id"] == inserted_id
         assert doc["title"] == "Updated Title"
+        assert doc["description"] == "tt"
         assert doc["is_active"] is True
         assert doc["daily_orders"] == []
         assert doc["orders"] == []
@@ -158,12 +162,12 @@ def test_api():
         today = datetime.now()
         doc = response.json()
         assert len(doc) == 1
-        assert doc[0]["order_day_time"][:-6] == today.replace(hour=10, minute=20, second=0).isoformat()[:-6]
+        assert (
+            doc[0]["order_day_time"]
+            == today.replace(hour=10, minute=20, second=0, microsecond=0).isoformat()
+        )
 
-        # Delete the doc
-        response = delete(delivery_root + inserted_id)
-        response.raise_for_status()
-
+        # Delete the docNone
         # Get the doc and ensure it's been deleted
         response = get(delivery_root + inserted_id)
         assert response.status_code == 200

@@ -123,3 +123,11 @@ async def get_id_by_customer_title(title: str):
         title, delivery_collection
     )
     return response
+
+
+@router.get("/get_id_by_customer_description/{description}")
+async def get_id_by_customer_description(description: str):
+    response = await CustomerCRUD(CustomerModel).get_id_by_customer_description(
+        description, delivery_collection
+    )
+    return response

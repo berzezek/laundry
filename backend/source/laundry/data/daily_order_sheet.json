@@ -1,0 +1,1061 @@
+[
+  {
+    "title": "Чехов основной",
+    "description": "chm",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "08:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "18:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "08:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "18:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "18:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "18:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "18:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "08:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "18:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "08:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "18:00",
+        "is_active": true
+      }
+    ],
+    "_comment": "Чехов основной"
+  },
+  {
+    "title": "Чехов лайт",
+    "description": "chl",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "08:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "18:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "08:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "18:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "07:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "18:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "18:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "13:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "18:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "13:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "18:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "18:20",
+        "is_active": true
+      }
+    ],
+    "_comment": "Чехов лайт"
+  },
+  {
+    "title": "Чехов Юлдуз",
+    "description": "chy",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "12:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "17:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "17:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "18:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "08:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "18:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "12:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "17:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "12:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "17:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "17:35",
+        "is_active": true
+      }
+    ],
+    "_comment": "Чехов Юлдуз"
+  },
+  {
+    "title": "Чехов Салом",
+    "description": "chs",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "17:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "17:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "17:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "08:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "17:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "17:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "08:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "16:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "08:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "16:40",
+        "is_active": true
+      }
+    ],
+    "_comment": "Чехов Салом"
+  },
+  {
+    "title": "Чехов Анхор",
+    "description": "cha",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "13:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "17:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "17:55",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "19:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "13:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "17:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "07:55",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "13:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "17:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "07:55",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "18:00",
+        "is_active": true
+      }
+    ],
+    "_comment": "Чехов Анхор"
+  },
+  {
+    "title": "Мамс",
+    "description": "ms",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "07:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "12:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "17:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "17:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "18:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "08:05",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "18:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "12:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "18:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "07:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "12:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "17:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "07:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "17:25",
+        "is_active": true
+      }
+    ],
+    "_comment": "Мамс"
+  },
+  {
+    "title": "More",
+    "description": "mr",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "21:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "21:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "21:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "21:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "21:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "10:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "10:00",
+        "is_active": true
+      }
+    ],
+    "_comment": "More"
+  },
+  {
+    "title": "Humo",
+    "description": "hm",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "13:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "20:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "20:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "07:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "20:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "07:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "19:45",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "13:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "20:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "08:10",
+        "is_active": true
+      }
+    ],
+    "_comment": "Humo"
+  },
+  {
+    "title": "Бука",
+    "description": "bk",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "08:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "18:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "18:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "07:55",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "18:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "07:55",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "18:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "08:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "18:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "08:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "18:40",
+        "is_active": true
+      }
+    ],
+    "_comment": "Бука"
+  },
+  {
+    "title": "Profit",
+    "description": "pt",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "08:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "09:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "09:35",
+        "is_active": true
+      }
+    ],
+    "_comment": "Profit"
+  },
+  {
+    "title": "Buka2",
+    "description": "bk2",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "07:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "13:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "19:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "07:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "13:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1,
+        "time_of_day": "19:20",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "07:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "13:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "19:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "07:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "13:25",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "19:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "07:15",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "19:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "07:40",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "13:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "17:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "07:30",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "17:50",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "title": "Центрис",
+    "description": "cn",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "10:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 1, 
+        "time_of_day": "10:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "10:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 3,
+        "time_of_day": "08:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "10:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "10:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "10:35",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "title": "Люмьер",
+    "description": "lm",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 4,
+        "time_of_day": "09:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "10:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "10:00",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "title": "Роси",
+    "description": "rs",
+    "is_active": true,
+    "daily_orders": [
+      {
+        "day_of_week": 0,
+        "time_of_day": "08:10",
+        "is_active": true
+      },
+      {
+        "day_of_week": 0,
+        "time_of_day": "19:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "08:00",
+        "is_active": true
+      },
+      {
+        "day_of_week": 2,
+        "time_of_day": "19:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 4,
+        "time_of_day": "19:35",
+        "is_active": true
+      },
+      {
+        "day_of_week": 5,
+        "time_of_day": "17:50",
+        "is_active": true
+      },
+      {
+        "day_of_week": 6,
+        "time_of_day": "18:00",
+        "is_active": true
+      }
+    ]
+  },
+  {"_comment": ["Чехов основной", "Чехов лайт", "Чехов Юлдуз", "Чехов Салом", "Чехов Анхор", "Мамс", "More", "Humo", "Бука", "Profit", "Buka2", "Центрис", "Люмьер", "Роси"]}
+]

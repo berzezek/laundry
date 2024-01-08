@@ -243,3 +243,14 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
         ) is not None:
             return str(customer["_id"])
         return None
+        return None
+
+    async def get_id_by_customer_description(
+        self, description: str, collection: AsyncIOMotorCollection
+    ) -> str:
+        regex_pattern = re.compile(f"^{re.escape(description)}$", re.IGNORECASE)
+        if (
+            customer := await collection.find_one({"description": {"$regex": regex_pattern}})
+        ) is not None:
+            return str(customer["_id"])
+        return None

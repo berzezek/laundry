@@ -6,7 +6,7 @@ import pandas as pd
 from openpyxl.utils import get_column_letter
 from bot import logging
 from keyboards.simple_fab import get_admin_keyboard_fab
-from utils import get_all_orders_for_today, get_all_delivered_orders_for_today
+from utils import get_all_orders_for_today, get_all_delivered_orders_for_today, get_all_customers, format_orders
 from config import BASE_DIR
 
 router = Router()
@@ -86,3 +86,22 @@ async def callbacks_delivery_allready_delivered(
     writer.close()
 
     await callback.answer(f"Отчет {filename} сформирован")
+    
+@router.callback_query(OrdersCallbackFactory.filter(F.action == "periodic_orders"))
+async def callbacks_delivery_allready_delivered(
+    callback: CallbackQuery, callback_data: OrdersCallbackFactory
+):
+    data = get_all_customers()
+
+    message = "|    Таблица периодических заказов\n|\n"
+
+    # Перебор каждого заказчика и добавление информации в сообщение
+    for customer in data.json()["customers"]:
+        message += f"| **{customer['title']} ({customer['description']})**\n"
+        order_lines = format_orders(customer["daily_orders"])
+        message += "|  Пн   |  Вт   |  Ср   |  Чт   |  Пт   |  Сб   |  Вс   |\n"
+        message += "|-------|-------|-------|-------|-------|-------|-------|\n"
+        for line in order_lines:
+            message += line + "\n"
+            
+    await callback.message.answer(text=f"```\n{message}\n```", parse_mode="Markdown", reply_markup=get_admin_keyboard_fab())

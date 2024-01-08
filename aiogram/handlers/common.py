@@ -14,8 +14,10 @@ from keyboards.simple_fab import (
 )
 from utils import (
     add_telegram,
+    get_customer_by_id,
     get_today_orders_by_customer_title,
     get_id_by_customer_title,
+    get_id_by_customer_description,
     delivery_order,
     choose_row_keyboard,
 )
@@ -24,9 +26,10 @@ from config import ADMIN_USERS
 
 router = Router()
 
-pure_choose = ["Вход", "Отмена"]
-pure_admin_choose = ["Вход", "Отмена", "Админ"]
-re_registration_choose = ["Продолжить", "Начать сначала"]
+pure_choose = ["Вход"]
+pure_admin_choose = ["Вход", "Админ"]
+# re_registration_choose = ["Продолжить", "Начать сначала"]
+re_registration_choose = ["Продолжить"]
 
 
 class DeliveryState(StatesGroup):
@@ -81,7 +84,9 @@ async def pure_state(message: Message, state: FSMContext):
         )
         await state.set_state(DeliveryState.admin_state)
     else:
-        customer_id = get_id_by_customer_title(message.text)
+        customer_id = get_id_by_customer_description(message.text)
+        customer = get_customer_by_id(customer_id.json())
+        customer_title = customer.json().get("title")
         data = {
             "telegram_id": message.from_user.id,
             "telegram_name": message.from_user.full_name,
@@ -89,12 +94,12 @@ async def pure_state(message: Message, state: FSMContext):
         response = add_telegram(customer_id.json(), data)
         if response.status_code == 200:
             await message.answer(
-                text=sending_messages(message, message.text).get(
+                text=sending_messages(message, customer_title).get(
                     "registration_success"
                 ),
                 reply_markup=make_row_keyboard(re_registration_choose),
             )
-            await state.update_data({"customer": message.text.lower()})
+            await state.update_data({"customer": customer_title})
             logging.info(
                 f"customer: {message.text.lower()}"
                 f" was registered by {message.from_user.full_name}"
@@ -118,7 +123,7 @@ async def get_customer(message: Message, state: FSMContext):
         if len(orders["today_orders"]) == 0:
             await message.answer(
                 text=sending_messages(message, customer).get("not_delivery_for_today"),
-                reply_markup=ReplyKeyboardRemove(),
+                # reply_markup=ReplyKeyboardRemove(),
             )
         else:
             await message.answer(
@@ -132,6 +137,7 @@ async def get_customer(message: Message, state: FSMContext):
             reply_markup=ReplyKeyboardRemove(),
         )
         await state.clear()
+        await state.set_state(DeliveryState.pure_state)
 
 
 @router.callback_query(OrdersCallbackFactory.filter(F.action == "update_order"))

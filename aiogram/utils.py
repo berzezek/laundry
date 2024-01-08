@@ -9,9 +9,20 @@ from keyboards.simple_row import make_row_keyboard, make_hidden_row_keyboard
 from config import DELIVERY_SERVICE_API_URL, ADMIN_USERS
 
 
+def get_all_customers():
+    response = requests.get(DELIVERY_SERVICE_API_URL)
+    return response
+
 def get_customer_by_telegram_id(telegram_id: str):
     response = requests.get(
         DELIVERY_SERVICE_API_URL + f"get_customer_by_telegram_id/{telegram_id}"
+    )
+    return response
+    return response
+
+def get_customer_by_id(id: str):
+    response = requests.get(
+        DELIVERY_SERVICE_API_URL + f"{id}"
     )
     return response
 
@@ -24,6 +35,13 @@ def add_telegram(id: str, data: dict):
 def get_id_by_customer_title(title: str):
     response = requests.get(
         DELIVERY_SERVICE_API_URL + f"get_id_by_customer_title/{title}"
+    )
+    return response
+
+
+def get_id_by_customer_description(description: str):
+    response = requests.get(
+        DELIVERY_SERVICE_API_URL + f"get_id_by_customer_description/{description}"
     )
     return response
 
@@ -96,3 +114,22 @@ def choose_row_keyboard(message: Message, customer_row: list, admin_row: list) -
         )
         return admin_row
     return customer_row
+
+def format_orders(orders):
+    # Создаем словарь для каждого дня недели
+    weekly_orders = {i: [] for i in range(7)}
+    for order in orders:
+        weekly_orders[order["day_of_week"]].append(order["time_of_day"])
+    
+    # Формируем строки с заказами
+    max_length = max(len(day_orders) for day_orders in weekly_orders.values())
+    order_lines = []
+    for i in range(max_length):
+        line = "|"
+        for day in range(7):
+            if i < len(weekly_orders[day]):
+                line += " " + weekly_orders[day][i] + " |"
+            else:
+                line += " --:-- |"  # Используем маркер для пустого времени
+        order_lines.append(line)
+    return order_lines

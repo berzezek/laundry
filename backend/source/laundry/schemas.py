@@ -115,6 +115,7 @@ class CustomerModel(BaseModel):
 
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
+    description: Optional[str] = Field(...)
     is_active: bool = Field(...)
     daily_orders: Optional[list[DailyOrderModel]] = []
     orders: Optional[list[OrdersModel]] = []
@@ -122,7 +123,7 @@ class CustomerModel(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
         arbitrary_types_allowed=True,
-        json_schema_extra={"example": {"title": "Customer", "is_active": True}},
+        json_schema_extra={"example": {"title": "Customer", "is_active": True, "description": "c"}},
     )
 
 
@@ -133,6 +134,7 @@ class UpdateCustomerModel(BaseModel):
 
     title: Optional[str] = None
     is_active: Optional[bool] = None
+    description: Optional[str] = None
     daily_orders: Optional[list[UpdateDailyOrderModel]] = None
     orders: Optional[list[UpdateOrdersModel]] = None
     telegram: Optional[list[UpdateTelegramModel]] = None
@@ -142,6 +144,7 @@ class UpdateCustomerModel(BaseModel):
         json_schema_extra={
             "example": {
                 "title": "NewCustomer",
+                "description": "nc",
                 "is_active": False,
                 "daily_orders": [
                     {"day_of_week": 1, "time_of_day": "21:00:00", "is_active": True},
