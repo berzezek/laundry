@@ -77,7 +77,7 @@ async def add_telegram_id(id: str, data: TelegramModel):
     return response
 
 
-@router.get("/add_orders_by_daily_orders/")
+@router.get("/add_orders_by_daily_orders/", description="Add all orders for today")
 async def add_orders_by_daily_orders():
     response = await CustomerCRUD(List[Optional[Dict]]).add_orders_by_daily_orders(
         delivery_collection

@@ -39,7 +39,7 @@ async def callbacks_delivery_allready_delivered(
                 delivery_hour_minute = order['delivery_day_time'].split("T")[1].split(".")[0][:-3]
             else:
                 delivery_hour_minute = "Не доставлено"
-            message += f"\t{order_hour_minute} | {delivery_hour_minute}\n"
+            message += f"\t{order_hour_minute} | {delivery_hour_minute} {f"| {order['delivered_by']}" if order['delivered_by'] else ''}\n"
         message += "---\n"
     # Отправляем сообщение
     await callback.message.answer(text=f"```\n{message}\n```", parse_mode="Markdown", reply_markup=get_admin_keyboard_fab())

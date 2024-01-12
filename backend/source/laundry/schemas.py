@@ -40,6 +40,7 @@ class UpdateDailyOrderModel(BaseModel):
 class OrdersModel(BaseModel):
     order_day_time: datetime
     delivery_day_time: Optional[datetime] = None
+    delivered_by: Optional[str] = None
     model_config = ConfigDict(
         populate_by_name=True,
         arbitrary_types_allowed=True,
@@ -54,7 +55,8 @@ class OrdersModel(BaseModel):
 
 class UpdateOrdersModel(BaseModel):
     order_day_time: Optional[datetime] = None
-    delivery_day_time: Optional[datetime] = None
+    delivery_day_time: datetime
+    delivered_by: str
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders={ObjectId: str},
@@ -62,6 +64,7 @@ class UpdateOrdersModel(BaseModel):
             "example": {
                 "order_day_time": "2021-10-10 10:00:00",
                 "delivery_day_time": "2021-10-10 10:00:05",
+                "delivered_by": "Customer telegram name"
             }
         },
     )

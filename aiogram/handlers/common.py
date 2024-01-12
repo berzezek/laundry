@@ -29,7 +29,7 @@ router = Router()
 pure_choose = ["Вход"]
 pure_admin_choose = ["Вход", "Админ"]
 # re_registration_choose = ["Продолжить", "Начать сначала"]
-re_registration_choose = ["Продолжить"]
+continue_choose = ["Продолжить/Обновить"]
 
 
 class DeliveryState(StatesGroup):
@@ -56,7 +56,7 @@ async def pure_state(message: Message, state: FSMContext):
         if customer:
             await message.answer(
                 text=sending_messages(message, customer).get("enter_success"),
-                reply_markup=make_row_keyboard(re_registration_choose),
+                reply_markup=make_row_keyboard(continue_choose),
             )
             await state.set_state(DeliveryState.customer_state)
         else:
@@ -97,7 +97,7 @@ async def pure_state(message: Message, state: FSMContext):
                 text=sending_messages(message, customer_title).get(
                     "registration_success"
                 ),
-                reply_markup=make_row_keyboard(re_registration_choose),
+                reply_markup=make_row_keyboard(continue_choose),
             )
             await state.update_data({"customer": customer_title})
             logging.info(
@@ -144,7 +144,7 @@ async def get_customer(message: Message, state: FSMContext):
 async def callbacks_add_delivery_time_to_order(
     callback: types.CallbackQuery, callback_data: OrdersCallbackFactory
 ):
-    delivery_order(callback_data)
+    delivery_order(callback_data, callback.from_user.full_name)
     await callback.answer(
         sending_messages(callback.message).get("delivery_for_customer_success")
     )

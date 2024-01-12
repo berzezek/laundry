@@ -1,29 +1,31 @@
-import os
-from typing import Optional, List
-
-from fastapi import FastAPI, Body, HTTPException, status
-from fastapi.responses import Response
-from pydantic import ConfigDict, BaseModel, Field, EmailStr
-from pydantic.functional_validators import BeforeValidator
-from source.config import MONGODB_URL
-
-from typing_extensions import Annotated
-
-from bson import ObjectId
-import motor.motor_asyncio
-from pymongo import ReturnDocument
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from source.laundry.router import router as laundry_router
+from source.laundry.schedules import start_schedule
+
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     try:
+#         print("Starting scheduler")
+#         await start_schedule()
+#         yield
+#     finally:
+#         pass
+
 
 
 app = FastAPI(
     title="Delivery API",
     summary="A simple API to manage delivery",
+    # lifespan=lifespan,
 )
 
-api_v1_routers = [
-    laundry_router
-]
+    
+api_v1_routers = [laundry_router]
 
 for router in api_v1_routers:
     app.include_router(router, prefix="/api/v1")
-    
+
+# @app.on_event("startup")
+# async def startup():
+#     await start_schedule()

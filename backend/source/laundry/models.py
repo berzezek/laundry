@@ -87,7 +87,7 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
         if len(data) >= 1:
             update_result = await collection.find_one_and_update(
                 {"_id": ObjectId(id), "orders.order_day_time": data["order_day_time"]},
-                {"$set": {"orders.$.delivery_day_time": data["delivery_day_time"]}},
+                {"$set": {"orders.$.delivery_day_time": data["delivery_day_time"], "orders.$.delivered_by": data["delivered_by"]}},
                 return_document=ReturnDocument.AFTER,
             )
             if update_result is not None:
@@ -212,6 +212,7 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
                         "$push": {
                             "order_day_time": "$orders.order_day_time",
                             "delivery_day_time": "$orders.delivery_day_time",
+                            "delivered_by": "$orders.delivered_by"
                         }
                     },
                 }

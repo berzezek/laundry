@@ -13,8 +13,8 @@ def get_keyboard_orders_fab(orders: list):
     for order in orders['today_orders']:
         order_hour_minute = str(order['order_day_time'].split("T")[1].split(".")[0][:-3])
         builder.button(text=order_hour_minute, callback_data=OrdersCallbackFactory(action="delivered_time", value=order_hour_minute.replace(":", "_")))
-        if order['delivery_day_time']:
-            builder.button(text="Доставлено", callback_data=OrdersCallbackFactory(action="delivered"))
+        if order['delivery_day_time'] and order['delivered_by']:
+            builder.button(text=f"Доставлено {order['delivered_by']}", callback_data=OrdersCallbackFactory(action="delivered"))
         else:
             callback_data_time_with_customer_id = f"{order_hour_minute.replace(":", "_")}_{orders['customer']}"
             builder.button(text="Получить", callback_data=OrdersCallbackFactory(action="update_order", value=callback_data_time_with_customer_id))

@@ -75,23 +75,24 @@ def get_today_orders_by_customer_title(title: str):
     return today_orders
 
 
-def delivery_order(callback_data_time_with_customer_id: OrdersCallbackFactory):
+def delivery_order(callback_data_time_with_customer_id: OrdersCallbackFactory, telegram_id):
     callback_data_time_with_customer_id_value = callback_data_time_with_customer_id.value
     callback_data_time_with_customer_id_value_split = callback_data_time_with_customer_id_value.split("_")
     order_day_time = datetime.today().replace(
         hour=int(callback_data_time_with_customer_id_value_split[0]), minute=int(callback_data_time_with_customer_id_value_split[1]), second=0
     )
     delivery_day_time = datetime.now()
-    update_order_time = {
+    update_data = {
         "order_day_time": str(order_day_time.strftime("%Y-%m-%d %H:%M:%S")),
         "delivery_day_time": str(delivery_day_time.strftime("%Y-%m-%d %H:%M:%S")),
+        "delivered_by": str(telegram_id)
     }
     customer_id = callback_data_time_with_customer_id_value_split[2]
     response = requests.put(
         DELIVERY_SERVICE_API_URL + f"update_order/{customer_id}",
-        json=update_order_time,
+        json=update_data,
     )
-    logging.info(f'Customer id: {customer_id} order time updated: {update_order_time}')
+    logging.info(f'Customer id: {customer_id} order time updated: {update_data}')
     return response
 
     
