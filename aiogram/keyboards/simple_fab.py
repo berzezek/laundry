@@ -16,7 +16,7 @@ def get_keyboard_orders_fab(orders: list):
         if order['delivery_day_time'] and order['delivered_by']:
             builder.button(text=f"Доставлено {order['delivered_by']}", callback_data=OrdersCallbackFactory(action="delivered"))
         else:
-            callback_data_time_with_customer_id = f"{order_hour_minute.replace(":", "_")}_{orders['customer']}"
+            callback_data_time_with_customer_id = f'{order_hour_minute.replace(":", "_")}_{orders["customer"]}'
             builder.button(text="Получить", callback_data=OrdersCallbackFactory(action="update_order", value=callback_data_time_with_customer_id))
         builder.adjust(2)
     return builder.as_markup()

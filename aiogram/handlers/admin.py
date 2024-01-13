@@ -25,7 +25,7 @@ async def callbacks_delivery_allready_delivered(
 ):
     data = get_all_orders_for_today()
     # Формируем заголовок таблицы
-    message = f"Статистика за {datetime.now().strftime("%d.%m.%Y")}\n\n"
+    message = f"Статистика за {datetime.now().strftime('%d.%m.%Y')}\n\n"
 
     # Добавляем строки таблицы
     for item in data.json():
@@ -39,7 +39,7 @@ async def callbacks_delivery_allready_delivered(
                 delivery_hour_minute = order['delivery_day_time'].split("T")[1].split(".")[0][:-3]
             else:
                 delivery_hour_minute = "Не доставлено"
-            message += f"\t{order_hour_minute} | {delivery_hour_minute} {f"| {order['delivered_by']}" if order['delivered_by'] else ''}\n"
+            message += f"\t{order_hour_minute} | {delivery_hour_minute} {'| ' + str(order['delivered_by']) if order['delivered_by'] else ''}\n"
         message += "---\n"
     # Отправляем сообщение
     await callback.message.answer(text=f"```\n{message}\n```", parse_mode="Markdown", reply_markup=get_admin_keyboard_fab())
@@ -71,7 +71,7 @@ async def callbacks_delivery_allready_delivered(
     df = pd.DataFrame(rows)
 
     # Создание Excel файла
-    filename = f"{datetime.now().strftime("%Y-%m-%d")}.xlsx"
+    filename = f"{datetime.now().strftime('%Y-%m-%d')}.xlsx"
     file_path = f"{BASE_DIR}/aiogram/static/reports/daily_reports/{filename}"
     writer = pd.ExcelWriter(file_path, engine='openpyxl')
     df.to_excel(writer, index=False)

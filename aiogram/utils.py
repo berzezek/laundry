@@ -101,7 +101,7 @@ async def is_customer_exist(message: Message, state: FSMContext, re_registration
     if state_data.get("customer"):
         await message.answer(
             text=f"Привет: {message.from_user.full_name}!\n"
-            f"Ваше заведение {state_data.get("customer")}",
+            f"Ваше заведение {state_data.get('customer')}",
             reply_markup=make_row_keyboard(re_registration_choose),
         )
         return True
