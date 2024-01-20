@@ -10,3 +10,5 @@ DELIVERY_SERVICE_API_URL = os.getenv("DELIVERY_SERVICE_API_URL")
 ADMIN_USERS = os.getenv("ADMIN_USERS").split(",")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TIMEZONE = os.getenv("TIMEZONE")

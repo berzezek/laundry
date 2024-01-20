@@ -50,6 +50,9 @@ class SendingMessages:
     def admin_start(self) -> str:
         return "Здравствуйте, Admin!"
 
+    def admin_fail(self) -> str:
+        return "Здравствуйте, Вы не можете зайти как администратор!"
+
     def choose_action(self) -> str:
         return "Выберите действие:"
 
@@ -57,16 +60,22 @@ class SendingMessages:
         return "Действие отменено\n Чтобы начать сначала нажмите /start"
 
     def delivery_for_today(self, custom_phrase) -> str:
-        return f"Доставки для {custom_phrase} на сегодня: <b>{datetime.now().strftime('%d.%m.%Y')}</b>"
+        return f"Доставки для <b>\"{custom_phrase}\"</b> на сегодня: <b>{datetime.now().strftime('%d.%m.%Y')}</b>"
 
     def not_delivery_for_today(self, custom_phrase) -> str:
-        return f"<b>Нет</b> доставок для {custom_phrase} на сегодня: {datetime.now().strftime('%d.%m.%Y')}"
+        return f"<b>Нет</b> доставок для <b>\"{custom_phrase}\"</b> на сегодня: {datetime.now().strftime('%d.%m.%Y')}"
 
     def delivery_for_customer_success(self) -> str:
         return f"Заказ доставлен"
 
     def delivery_allready_delivered(self) -> str:
         return f"Заказ уже доставлен"
+    
+    def delivery_awating_time(self, custom_phrase) -> str:
+        return f"Доставка намечается через {custom_phrase}"
+    
+    def delivery_delivered_time(self, custom_phrase) -> str:
+        return f"Доставка задерживается на {custom_phrase}"
 
 
 def sending_messages(message: Message, custom_phrase: str | None = None):
@@ -83,6 +92,7 @@ def sending_messages(message: Message, custom_phrase: str | None = None):
             custom_phrase
         ),
         "admin_start": SendingMessages(message).admin_start(),
+        "admin_fail": SendingMessages(message).admin_fail(),
         "choose_action": SendingMessages(message).choose_action(),
         "cancel": SendingMessages(message).cancel(),
         "delivery_for_today": SendingMessages(message).delivery_for_today(
@@ -97,5 +107,11 @@ def sending_messages(message: Message, custom_phrase: str | None = None):
         "delivery_allready_delivered": SendingMessages(
             message
         ).delivery_allready_delivered(),
+        "delivery_awating_time": SendingMessages(
+            message
+        ).delivery_awating_time(custom_phrase),
+        "delivery_delivered_time": SendingMessages(
+            message
+        ).delivery_delivered_time(custom_phrase),
     }
     return messages

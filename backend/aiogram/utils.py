@@ -3,10 +3,11 @@ from typing import Optional
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 from datetime import datetime
+import pytz
 from bot import logging
 from keyboards.simple_fab import OrdersCallbackFactory, get_admin_keyboard_fab
 from keyboards.simple_row import make_row_keyboard, make_hidden_row_keyboard
-from config import DELIVERY_SERVICE_API_URL, ADMIN_USERS
+from config import DELIVERY_SERVICE_API_URL, ADMIN_USERS, TIMEZONE
 
 
 def get_all_customers():
@@ -17,7 +18,6 @@ def get_customer_by_telegram_id(telegram_id: str):
     response = requests.get(
         DELIVERY_SERVICE_API_URL + f"get_customer_by_telegram_id/{telegram_id}"
     )
-    return response
     return response
 
 def get_customer_by_id(id: str):
@@ -81,7 +81,8 @@ def delivery_order(callback_data_time_with_customer_id: OrdersCallbackFactory, t
     order_day_time = datetime.today().replace(
         hour=int(callback_data_time_with_customer_id_value_split[0]), minute=int(callback_data_time_with_customer_id_value_split[1]), second=0
     )
-    delivery_day_time = datetime.now()
+    timezone = pytz.timezone(TIMEZONE)
+    delivery_day_time = datetime.now(timezone)
     update_data = {
         "order_day_time": str(order_day_time.strftime("%Y-%m-%d %H:%M:%S")),
         "delivery_day_time": str(delivery_day_time.strftime("%Y-%m-%d %H:%M:%S")),
@@ -134,3 +135,6 @@ def format_orders(orders):
                 line += " --:-- |"  # Используем маркер для пустого времени
         order_lines.append(line)
     return order_lines
+
+def format_time_to_hour_minute(str_time: str):
+    return str_time.split("T")[1].split(".")[0][:-3]

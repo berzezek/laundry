@@ -87,7 +87,12 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
         if len(data) >= 1:
             update_result = await collection.find_one_and_update(
                 {"_id": ObjectId(id), "orders.order_day_time": data["order_day_time"]},
-                {"$set": {"orders.$.delivery_day_time": data["delivery_day_time"], "orders.$.delivered_by": data["delivered_by"]}},
+                {
+                    "$set": {
+                        "orders.$.delivery_day_time": data["delivery_day_time"],
+                        "orders.$.delivered_by": data["delivered_by"],
+                    }
+                },
                 return_document=ReturnDocument.AFTER,
             )
             if update_result is not None:
@@ -165,6 +170,44 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
                     )
         return adding_orders
 
+    async def update_all_delivery_times(
+        self, collection: AsyncIOMotorCollection
+    ) -> list[Optional[dict]]:
+        """
+        get today_orders
+        for each order in today_orders:
+            if delivery_day_time is None:
+                update delivery_day_time to order_day_time
+                update delivered_by to 'По расписанию'
+        """
+        today_orders = await self.get_all_orders_for_today(collection)
+        updated_orders = []
+        for orders in today_orders:
+            for order in orders["today_orders"]:
+                if order["delivery_day_time"] == None:
+                    delivery_day_time = order["order_day_time"]
+                    delivered_by = "По расписанию"
+                    await collection.find_one_and_update(
+                        {
+                            "title": orders["title"],
+                            "orders.order_day_time": order["order_day_time"],
+                        },
+                        {
+                            "$set": {
+                                "orders.$.delivery_day_time": delivery_day_time,
+                                "orders.$.delivered_by": delivered_by,
+                            }
+                        })
+                    updated_orders.append(
+                        {
+                            "customer_name": orders["title"],
+                            "order_day_time": order["order_day_time"],
+                            "delivery_day_time": delivery_day_time,
+                            "delivered_by": delivered_by,
+                        }
+                    )
+        return updated_orders
+
     async def get_all_delivered_orders_for_today(
         self, collection: AsyncIOMotorCollection
     ) -> list[dict]:
@@ -174,7 +217,12 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
 
         pipeline = [
             {"$unwind": "$orders"},
-            {"$match": {"orders.order_day_time": {"$gte": current_date_str}, "orders.delivery_day_time": {"$ne": None}}},
+            {
+                "$match": {
+                    "orders.order_day_time": {"$gte": current_date_str},
+                    "orders.delivery_day_time": {"$ne": None},
+                }
+            },
             {
                 "$group": {
                     "_id": "$title",
@@ -186,7 +234,13 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
                     },
                 }
             },
-            {"$project": {"title": "$_id", "_id": 0, "today_delivered_orders": "$orders"}},
+            {
+                "$project": {
+                    "title": "$_id",
+                    "_id": 0,
+                    "today_delivered_orders": "$orders",
+                }
+            },
         ]
 
         today_delivered_orders = []
@@ -212,7 +266,7 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
                         "$push": {
                             "order_day_time": "$orders.order_day_time",
                             "delivery_day_time": "$orders.delivery_day_time",
-                            "delivered_by": "$orders.delivered_by"
+                            "delivered_by": "$orders.delivered_by",
                         }
                     },
                 }
@@ -251,7 +305,9 @@ class CustomerCRUD(CRUDMongo[CustomerModel, CustomerCollection, UpdateCustomerMo
     ) -> str:
         regex_pattern = re.compile(f"^{re.escape(description)}$", re.IGNORECASE)
         if (
-            customer := await collection.find_one({"description": {"$regex": regex_pattern}})
+            customer := await collection.find_one(
+                {"description": {"$regex": regex_pattern}}
+            )
         ) is not None:
             return str(customer["_id"])
         return None

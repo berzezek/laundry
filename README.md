@@ -8,14 +8,13 @@
 
 * git clone
 * cd ..
-* update .env
+* mv env.example .env
 * make up
 
 ## Usage
 
 * Backend Fastapi swagger on http://localhost:8000/docs or redoc on http://localhost:8000/redoc
-* Frontend VueJs on http://localhost:5173
-* Database Mongo on mongodb://localhost:27017
+* Database Mongo on mongodb://mongodb:27017
 
 ## Telegram bot
 

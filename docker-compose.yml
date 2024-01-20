@@ -15,8 +15,6 @@ services:
       - ./backend/.env
     depends_on:
       - mongodb
-    networks:
-      - laundry-network
 
   aiogram:
     build:
@@ -25,71 +23,28 @@ services:
     restart: on-failure
     command: /start-aiogram
     volumes:
-      - ./aiogram:/app
-    env_file:
-      - ./aiogram/.env
+      - ./backend:/app
     depends_on:
       - mongodb
-    networks:
-      - laundry-network
 
-  # worker:
-  #   build:
-  #     context: .
-  #     dockerfile: ./compose/backend/Dockerfile
-  #   command: /start-celeryworker
-  #   volumes:
-  #     - ./backend:/app
-  #   env_file:
-  #     - ./backend/.env
-  #   depends_on:
-  #     - web
-  #     - mongodb
-
-  # beat:
-  #   build:
-  #     context: .
-  #     dockerfile: ./compose/backend/Dockerfile
-  #   command: /start-celerybeat
-  #   volumes:
-  #     - ./backend:/app
-  #   env_file:
-  #     - ./backend/.env
-  #   depends_on:
-  #     - web
-  #     - mongodb
-
-  # dashboard:
-  #   build:
-  #     context: .
-  #     dockerfile: ./compose/backend/Dockerfile
-  #   command: /start-flower
-  #   ports:
-  #     - 5556:5555
-  #   env_file:
-  #     - ./backend/.env
-  #   depends_on:
-  #     - web
-  #     - mongodb
-  #     - worker
+  scheduler:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    command: /start-scheduler
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - web
 
   mongodb:
     image: mongo:7.0.5
     ports:
       - 27037:27017
-    # environment:
-    #   - MONGO_INITDB_ROOT_USERNAME=root
-    #   - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - mongo_data:/data/db
-    networks:
-      - laundry-network
 
 volumes:
   mongo_data:
-
-networks:
-  laundry-network:
-    driver: bridge
 
 

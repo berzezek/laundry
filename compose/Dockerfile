@@ -31,17 +31,9 @@ COPY ./compose/aiogram/start /start-aiogram
 RUN sed -i 's/\r$//g' /start-aiogram
 RUN chmod +x /start-aiogram
 
-# COPY ./compose/celery/worker/start /start-celeryworker
-# RUN sed -i 's/\r$//g' /start-celeryworker
-# RUN chmod +x /start-celeryworker
-
-# COPY ./compose/celery/beat/start /start-celerybeat
-# RUN sed -i 's/\r$//g' /start-celerybeat
-# RUN chmod +x /start-celerybeat
-
-# COPY ./compose/celery/flower/start /start-flower
-# RUN sed -i 's/\r$//g' /start-flower
-# RUN chmod +x /start-flower
+COPY ./compose/scheduler/start /start-scheduler
+RUN sed -i 's/\r$//g' /start-scheduler
+RUN chmod +x /start-scheduler
 
 # set work directory
 WORKDIR /app
