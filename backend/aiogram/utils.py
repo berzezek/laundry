@@ -138,3 +138,11 @@ def format_orders(orders):
 
 def format_time_to_hour_minute(str_time: str):
     return str_time.split("T")[1].split(".")[0][:-3]
+
+def logging_message():
+    def wrapper(func):
+        async def wrapped(*args, **kwargs):
+            message = args[0]
+            logging.info(f"Message from {message.from_user.full_name} with id {message.from_user.id}: {message.text}")
+            return await func(*args, **kwargs)
+        return wrapped

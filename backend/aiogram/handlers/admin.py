@@ -86,6 +86,10 @@ async def callbacks_delivery_allready_delivered(
     writer.close()
 
     await callback.answer(f"Отчет {filename} сформирован")
+    await callback.answer.send_document(InputFile(file_path), caption=f"Отчет {filename}")
+
+
+
     
 @router.callback_query(OrdersCallbackFactory.filter(F.action == "periodic_orders"))
 async def callbacks_delivery_allready_delivered(
